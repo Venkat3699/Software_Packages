@@ -54,7 +54,7 @@
     ```
 12. Write a Service for SonarQube
     - Create a systemd service unit file for SonarQube. Create a file named **/etc/systemd/system/sonar.service** and add the following content:
-    ```
+       ```
       [Unit]
       Description=SonarQube service
       After=network.target
@@ -68,7 +68,7 @@
       LimitNOFILE=65536
       [Install]
       WantedBy=multi-user.target
-   ```
+      ```
     
 13. Start the SonarQube service.
     ```
