@@ -62,10 +62,10 @@
       ExecStop=/opt/sonar/bin/linux-x86-64/sonar.sh stop
       Restart=always
       LimitNOFILE=65536
+     
       [Install]
       WantedBy=multi-user.target
-    ```
-    
+   ```  
 #### Start the SonarQube service.
    ```
     sudo systemctl start sonar
