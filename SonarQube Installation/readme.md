@@ -51,21 +51,21 @@
 #### Write a Service for SonarQube
    - Create a systemd service unit file for SonarQube. Create a file named **/etc/systemd/system/sonar.service** and add the following content:
      ```
-      [Unit]
-      Description=SonarQube service
-      After=network.target
-      
-      [Service]
-      Type=forking
-      User=sonar
-      ExecStart=/opt/sonar/bin/linux-x86-64/sonar.sh start
-      ExecStop=/opt/sonar/bin/linux-x86-64/sonar.sh stop
-      Restart=always
-      LimitNOFILE=65536
-     
-      [Install]
-      WantedBy=multi-user.target
-   ```  
+         [Unit]
+         Description=SonarQube service
+         After=network.target
+         
+         [Service]
+         Type=forking
+         User=sonar
+         ExecStart=/opt/sonar/bin/linux-x86-64/sonar.sh start
+         ExecStop=/opt/sonar/bin/linux-x86-64/sonar.sh stop
+         Restart=always
+         LimitNOFILE=65536
+        
+         [Install]
+         WantedBy=multi-user.target
+    ```  
 #### Start the SonarQube service.
    ```
     sudo systemctl start sonar
