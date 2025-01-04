@@ -1,1 +1,1 @@
-- Connect to SonarQube Server using Putty/GitBash
+Connect to SonarQube Server using Putty/GitBash
