@@ -49,7 +49,8 @@
     ```
 11. Give Sonar user permissions to the **/opt/sonarqube** directory.
     ```
-    sudo chown sonarqube:sonarqube /opt/sonarqube -R
+    chown sonarqube:sonarqube /opt/sonarqube -R
+    chmod -R 775 /opt/sonarqube
     ```
 12. Start the SonarQube service.
     ```
