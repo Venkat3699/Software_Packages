@@ -24,7 +24,7 @@ sudo apt update
 ```
 ### Install PostgreSQL 16 and contrib modules
 ```
-sudo apt install postgresql-16 postgresql-contrib-16
+sudo apt install postgresql-16 postgresql-contrib-16 -y
 ```
 ### Start and enable PostgreSQL service
 ```
