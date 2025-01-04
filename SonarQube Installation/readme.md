@@ -17,7 +17,7 @@
    ```
 #### Install Wget and Unzip
    ```
-   apt-get install -y wget unzip
+   sudo apt-get install -y wget unzip
    ```
 #### Download SonarQube using the URL
    ```
