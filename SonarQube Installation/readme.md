@@ -6,9 +6,9 @@
 # Installation Commands
 =======================
 1. Login as Root user
-```
-sudo su -
-```
+   ```
+   sudo su -
+   ```
 2. update the system repository list.
    ```
    apt-get update
@@ -16,6 +16,7 @@ sudo su -
 3. Install Java
    ```
    apt-get install openjdk-11-jdk -y
+   java --version
    ```
 4. Install Wget and Unzip
    ```
