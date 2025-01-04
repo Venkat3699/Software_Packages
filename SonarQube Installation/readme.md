@@ -37,7 +37,7 @@
    ```
 #### Create a system user along with the group for SonarQube
     ```
-    sudo useradd sonar
+       sudo useradd sonar
     ```
 #### Give Sonar user permissions to the **/opt/sonarqube** directory.
     ```
