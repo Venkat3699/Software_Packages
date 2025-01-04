@@ -42,23 +42,28 @@
     ```
     sudo adduser --system --no-create-home --group --disabled-login sonarqube
     ```
-10. Give Sonar user permissions to the **/opt/sonarqube** directory.
+10. Give Sudo Privillages to sonarQube User (Under Root User name)
+    ```
+    visudo
+    sonarqube ALL=(ALL:ALL) NOPASSWD:ALL
+    ```
+11. Give Sonar user permissions to the **/opt/sonarqube** directory.
     ```
     sudo chown sonarqube:sonarqube /opt/sonarqube -R
     ```
-11. Start the SonarQube service.
+12. Start the SonarQube service.
     ```
     systemctl start sonarqube
     ```
-12. Check the status of the service.
+13. Check the status of the service.
     ```
     systemctl status sonarqube
     ```
-13. Enable the service to start automatically at boot.
+14. Enable the service to start automatically at boot.
     ```
     systemctl enable sonarqube
     ```
-14. Verify if the Sonarqube server is functioning properly.
+15. Verify if the Sonarqube server is functioning properly.
     ```
     curl http://127.0.0.1:9000
     ```
