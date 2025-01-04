@@ -35,7 +35,7 @@
    ```
 7. Restart the sonarQube server
    ```
-   Start the SonarQube service.
+    sudo systemctl restart sonar
    ```
 8.  check the status of sonarqube
     ```
