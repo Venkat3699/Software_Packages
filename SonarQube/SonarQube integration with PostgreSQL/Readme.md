@@ -33,8 +33,14 @@
    ```
    sonar.web.host=0.0.0.0
    ```
-7. Restart the sonarQube server and check the status 
-
+7. Restart the sonarQube server
+   ```
+   Start the SonarQube service.
+   ```
+8.  check the status of sonarqube
+    ```
+     sudo systemctl status sonar
+    ```
 
 
 
