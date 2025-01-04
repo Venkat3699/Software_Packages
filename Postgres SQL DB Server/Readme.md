@@ -1,47 +1,43 @@
 On Linux Server UBUNTU
 ----------------------
 ### Switch to root user
-``` sudo su - ```
+``` 
+sudo su -
+```
 
 ### Update the server
-``` apt-get update ```
-
-### Ubuntu includes PostgreSQL by default. To install PostgreSQL on Ubuntu, use the apt (or other apt-driving) command: {simple way}
-``` apt install postgresql ``` 
-
-# PostgreSQL Apt Repository
-### The PostgreSQL Apt Repository supports the current versions of Ubuntu:
-- noble (24.04, LTS)
-- mantic (23.10, non-LTS)
-- jammy (22.04, LTS)
-- focal (20.04, LTS)
-### on the following architectures:
-- amd64
-- arm64 (LTS releases only)
-- ppc64el (LTS releases only)
-- s390x (LTS releases only)
-
-### Automated repository configuration:
 ```
-sudo apt install -y postgresql-common
-sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+sudo apt-get update
+sudo apt install gnupg2 wget nano
 ```
-
-### To manually configure the Apt repository, follow these steps:
+### Add the PostgreSQL 16 repository
 ```
-sudo apt install curl ca-certificates
-sudo install -d /usr/share/postgresql-common/pgdg
-sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
-sudo sh -c 'echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+```
+### Import the repository signing key
+```
+curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg
+```
+### Update the package list
+```
 sudo apt update
-sudo apt -y install postgresql
 ```
-### Initialise the database and enable automatic start
+### Install PostgreSQL 16 and contrib modules
 ```
-/usr/pgsql-16/bin/postgresql-16-setup initdb
-systemctl enable postgresql-16
-systemctl start postgresql-16
-systemctl status postgresql-16
+sudo apt install postgresql-16 postgresql-contrib-16
+```
+### Start and enable PostgreSQL service
+```
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+```
+### Allow PostgreSQL port through the firewall
+```
+sudo ufw allow 5432/tcp
+```
+### Check the version and ensure it's Postgresql 16
+```
+psql --version
 ```
 ### Switch to PostgeSql user
 ```
