@@ -36,21 +36,21 @@
    rm -rf sonarqube-9.9.2.77730.zip
    ```
 #### Create a system user along with the group for SonarQube
-```
-sudo useradd sonar
-```
+   ```
+    sudo useradd sonar
+   ```
 #### Give Sonar user permissions to the **/opt/sonarqube** directory.
   ```
     sudo chown -R sonar:sonar /opt/sonar
   ```
 #### Give Sudo Privillages to sonarQube User (Under Root User name)
-    ```
+   ```
     sudo vi /etc/sudoers
     sonar   ALL=(ALL:ALL) NOPASSWD:ALL
-    ```
+   ```
 #### Write a Service for SonarQube
-    - Create a systemd service unit file for SonarQube. Create a file named **/etc/systemd/system/sonar.service** and add the following content:
-       ```
+   - Create a systemd service unit file for SonarQube. Create a file named **/etc/systemd/system/sonar.service** and add the following content:
+     ```
       [Unit]
       Description=SonarQube service
       After=network.target
@@ -64,24 +64,24 @@ sudo useradd sonar
       LimitNOFILE=65536
       [Install]
       WantedBy=multi-user.target
-      ```
+    ```
     
 #### Start the SonarQube service.
-    ```
+   ```
     sudo systemctl start sonar
-    ```
+   ```
 #### Check the status of the service.
-    ```
+   ```
     sudo systemctl status sonar
-    ```
+   ```
 #### Enable the service to start automatically at boot.
-    ```
+   ```
     sudo systemctl enable sonar
-    ```
+   ```
 #### Verify if the Sonarqube server is functioning properly.
-    ```
+   ```
     curl http://<Public Ip>:9000
-    ```
+   ```
     
 
 
