@@ -86,7 +86,7 @@ find / - name postgresql.conf
 ```
 sudo vim /etc/postgresql/16/main/postgresql.conf
 ```
-#### Go to connection Settings --> In listen addressess = 'localhost' change to
+#### Go to connection Settings --> In listen addressess = 'localhost' change to and uncomment the line
 ```
 listen addressess = '*'
 ```
