@@ -99,9 +99,10 @@ cd /var/lib/pgsql/16/data/postgresql.conf
 listen addressess = '*'
 ```
 ### Restart database
+```
 systemctl restart postgresql-16
 systemctl status postgresql-16
-
+```
 
 
 
