@@ -40,17 +40,20 @@
    ```
 9. Create a system user along with the group for SonarQube
     ```
-    sudo adduser --system --no-create-home --group --disabled-login sonarqube
+    useradd sonar
     ```
 10. Give Sudo Privillages to sonarQube User (Under Root User name)
     ```
     visudo
-    sonarqube ALL=(ALL:ALL) NOPASSWD:ALL
+    sonar ALL=(ALL:ALL) NOPASSWD:ALL
     ```
 11. Give Sonar user permissions to the **/opt/sonarqube** directory.
     ```
-    chown sonarqube:sonarqube /opt/sonarqube -R
+    chown sonar:sonar /opt/sonarqube -R
     chmod -R 775 /opt/sonarqube
+    ```
+    ```
+    su - sonar
     ```
 12. Start the SonarQube service.
     ```
