@@ -7,9 +7,9 @@
    ulimit -u
    ```
 3. Create the PostgreSQL database in same server or another server. commands are in this folder: Postgres SQL DB Server
-4. Search for the **conf** file. the command is:
+4. Go to the **conf** file. the command is:
    ```
-   find - name / conf
+   cd /opt/sonar/conf
    ```
 5. Go to that directory and Edit the ***sonar.properties*** file:
    ```
