@@ -5,54 +5,50 @@
 
 # Installation Commands
 =======================
-1. Login as Root user
+#### update the system repository list.
    ```
-   sudo su -
+   sudo apt update
+   sudo apt upgrade -y
    ```
-2. update the system repository list.
+#### Install Java
    ```
-   apt-get update
-   ```
-3. Install Java
-   ```
-   apt-get install openjdk-11-jdk -y
+   sudo apt install openjdk-17-jdk -y
    java --version
    ```
-4. Install Wget and Unzip
+#### Install Wget and Unzip
    ```
    apt-get install -y wget unzip
    ```
-5. Download SonarQube using the URL
+#### Download SonarQube using the URL
    ```
-   sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.2.77730.zip
+   sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.2.77730.zip -P /opt
    ```
-6. Unzip the downloaded archive.
+#### Unzip the downloaded archive.
    ```
-   unzip /opt/sonarqube-9.9.2.77730.zip
+   sudo unzip /opt/sonarqube-9.9.2.77730.zip -d /opt
    ```
-7. Move the files to the **/opt/sonarqube** directory.
+#### Move the files to the **/opt/sonarqube** directory.
    ```
    sudo mv /opt/sonarqube-9.9.2.77730 /opt/sonar
    ```
-8. Delete the downloaded archive
+#### Delete the downloaded archive
    ```
    rm -rf sonarqube-9.9.2.77730.zip
    ```
-9. Create a system user along with the group for SonarQube
+#### Create a system user along with the group for SonarQube
     ```
-    useradd sonar
+    sudo useradd sonar
     ```
-10. Give Sonar user permissions to the **/opt/sonarqube** directory.
+#### Give Sonar user permissions to the **/opt/sonarqube** directory.
     ```
-    chown sonar:sonar /opt/sonar -R
-    chmod -R 775 /opt/sonar
+    sudo chown -R sonar:sonar /opt/sonar
     ```
-11. Give Sudo Privillages to sonarQube User (Under Root User name)
+#### Give Sudo Privillages to sonarQube User (Under Root User name)
     ```
     sudo vi /etc/sudoers
     sonar   ALL=(ALL:ALL) NOPASSWD:ALL
     ```
-12. Write a Service for SonarQube
+#### Write a Service for SonarQube
     - Create a systemd service unit file for SonarQube. Create a file named **/etc/systemd/system/sonar.service** and add the following content:
        ```
       [Unit]
@@ -70,21 +66,21 @@
       WantedBy=multi-user.target
       ```
     
-13. Start the SonarQube service.
+#### Start the SonarQube service.
     ```
-    systemctl start sonarqube
+    sudo systemctl start sonar
     ```
-14. Check the status of the service.
+#### Check the status of the service.
     ```
-    systemctl status sonarqube
+    sudo systemctl status sonar
     ```
-15. Enable the service to start automatically at boot.
+#### Enable the service to start automatically at boot.
     ```
-    systemctl enable sonarqube
+    sudo systemctl enable sonar
     ```
-16. Verify if the Sonarqube server is functioning properly.
+#### Verify if the Sonarqube server is functioning properly.
     ```
-    curl http://127.0.0.1:9000
+    curl http://<Public Ip>:9000
     ```
     
 
