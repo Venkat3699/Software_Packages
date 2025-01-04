@@ -95,7 +95,10 @@ listen addressess = '*'
 sudo systemctl restart postgresql
 sudo systemctl status postgresql
 ```
-
+### To Connect with the PostgreSQL DB, the command is:
+```
+psql -h <public IP of server> -p 5432 -U <username> -d <database>
+```
 ### To access the above database we need to install "sql-workbench". Download this "sql-workbench" the document URL is
 ```
 https://www.sql-workbench.eu/downloads.html
