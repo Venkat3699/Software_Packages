@@ -24,50 +24,66 @@
    ```
 5. Download SonarQube using the URL
    ```
-   wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.6.1.59531.zip
+   sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.2.77730.zip
    ```
 6. Unzip the downloaded archive.
    ```
-   unzip -q sonarqube-9.6.1.59531.zip
+   unzip /opt/sonarqube-9.9.2.77730.zip
    ```
 7. Move the files to the **/opt/sonarqube** directory.
    ```
-   sudo mv sonarqube-9.6.1.59531 /opt/sonarqube
+   sudo mv /opt/sonarqube-9.9.2.77730 /opt/sonar
    ```
 8. Delete the downloaded archive
    ```
-   rm sonarqube-9.6.1.59531.zip
+   rm -rf 9.9.8.100196.zip
    ```
 9. Create a system user along with the group for SonarQube
     ```
     useradd sonar
     ```
-10. Give Sudo Privillages to sonarQube User (Under Root User name)
+10. Give Sonar user permissions to the **/opt/sonarqube** directory.
     ```
-    visudo
-    sonar ALL=(ALL:ALL) NOPASSWD:ALL
+    chown sonar:sonar /opt/sonarqube-9.9.8.100196 -R
+    chmod -R 775 /opt/sonarqube-9.9.8.100196
     ```
-11. Give Sonar user permissions to the **/opt/sonarqube** directory.
+11. Give Sudo Privillages to sonarQube User (Under Root User name)
     ```
-    chown sonar:sonar /opt/sonarqube -R
-    chmod -R 775 /opt/sonarqube
+    sudo vi /etc/sudoers
+    sonar   ALL=(ALL:ALL) NOPASSWD:ALL
     ```
+12. Write a Service for SonarQube
+    - Create a systemd service unit file for SonarQube. Create a file named **/etc/systemd/system/sonar.service** and add the following content:
     ```
-    su - sonar
+   [Unit]
+   Description=SonarQube service
+   After=network.target
+   
+   [Service]
+   Type=forking
+   User=sonar
+   ExecStart=/opt/sonar/bin/linux-x86-64/sonar.sh start
+   ExecStop=/opt/sonar/bin/linux-x86-64/sonar.sh stop
+   Restart=always
+   LimitNOFILE=65536
+   
+   [Install]
+   WantedBy=multi-user.target
     ```
-12. Start the SonarQube service.
+    
+13. Start the SonarQube service.
     ```
     systemctl start sonarqube
     ```
-13. Check the status of the service.
+14. Check the status of the service.
     ```
     systemctl status sonarqube
     ```
-14. Enable the service to start automatically at boot.
+15. Enable the service to start automatically at boot.
     ```
     systemctl enable sonarqube
     ```
-15. Verify if the Sonarqube server is functioning properly.
+16. Verify if the Sonarqube server is functioning properly.
     ```
     curl http://127.0.0.1:9000
     ```
