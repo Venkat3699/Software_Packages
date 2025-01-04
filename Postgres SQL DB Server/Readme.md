@@ -41,11 +41,7 @@ psql --version
 ```
 ### Switch to PostgeSql user
 ```
-sudo su - postges
-```
-### Start PostgreSQL CLI
-```
-Psql
+sudo -u postgres psql
 ```
 ### Set password for the postgreSQL user
 ```
