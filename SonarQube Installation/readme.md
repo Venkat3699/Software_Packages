@@ -65,7 +65,7 @@
         
          [Install]
          WantedBy=multi-user.target
-    ```  
+     ```  
 #### Start the SonarQube service.
    ```
     sudo systemctl start sonar
