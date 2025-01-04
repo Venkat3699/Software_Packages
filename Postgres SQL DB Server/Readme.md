@@ -104,6 +104,30 @@ systemctl restart postgresql-16
 systemctl status postgresql-16
 ```
 
+### To access the above database we need to install "sql-workbench". Download this "sql-workbench" the document URL is
+```
+https://www.sql-workbench.eu/downloads.html
+```
+### We need to install some jdbc drivers to access the database. 
+- for that the URL is
+```
+https://mvnrepository.com/
+```
+- In search box, search for "postgre sql jdbc driver"
+- Click on your required version for the driver
+- Download the jar file in the Files Section of the version
 
-
+### Open the "sql-workbench"
+- Click on manage drivers below:
+  - select postgreSQL
+  - upload the downloaded postgre SQL jdbc driver
+  - Provide Database name
+  - Provide URL as
+    ```
+    jdbc:postgresql://PublicIp of sonarQube:5432/employees
+    ```
+  - Username as " rishikumar " 
+  - Password as " passw0rd "
+  - Click on " Test", to check the connection
+  - Now insert some data for the reference
 
