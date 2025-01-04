@@ -36,7 +36,7 @@
    ```
 8. Delete the downloaded archive
    ```
-   rm -rf 9.9.8.100196.zip
+   rm -rf sonarqube-9.9.2.77730.zip
    ```
 9. Create a system user along with the group for SonarQube
     ```
