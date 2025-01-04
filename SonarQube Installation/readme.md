@@ -40,9 +40,9 @@
 sudo useradd sonar
 ```
 #### Give Sonar user permissions to the **/opt/sonarqube** directory.
-    ```
+  ```
     sudo chown -R sonar:sonar /opt/sonar
-    ```
+  ```
 #### Give Sudo Privillages to sonarQube User (Under Root User name)
     ```
     sudo vi /etc/sudoers
