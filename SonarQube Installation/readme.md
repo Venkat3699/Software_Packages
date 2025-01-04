@@ -44,8 +44,8 @@
     ```
 10. Give Sonar user permissions to the **/opt/sonarqube** directory.
     ```
-    chown sonar:sonar /opt/sonarqube-9.9.8.100196 -R
-    chmod -R 775 /opt/sonarqube-9.9.8.100196
+    chown sonar:sonar /opt/sonar -R
+    chmod -R 775 /opt/sonar
     ```
 11. Give Sudo Privillages to sonarQube User (Under Root User name)
     ```
