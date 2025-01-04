@@ -36,9 +36,9 @@
    rm -rf sonarqube-9.9.2.77730.zip
    ```
 #### Create a system user along with the group for SonarQube
-    ```
-    sudo useradd sonar
-    ```
+```
+sudo useradd sonar
+```
 #### Give Sonar user permissions to the **/opt/sonarqube** directory.
     ```
     sudo chown -R sonar:sonar /opt/sonar
