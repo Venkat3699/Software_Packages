@@ -73,7 +73,7 @@ find / - name pg_hba.conf
 ```
 ### Goto that path (this is example)
 ```
-cd /var/lib/pgsql/16/data/pg_hba.conf
+sudo vim /etc/postgresql/16/main/pg_hba.conf
 ```
 ### Replace IPv4 address and authentication method as follows
 IPv4 local connections:
@@ -88,7 +88,7 @@ find / - name postgresql.conf
 ```
 ### Goto that path (this is example)
 ```
-cd /var/lib/pgsql/16/data/postgresql.conf
+sudo vim /etc/postgresql/16/main/postgresql.conf
 ```
 #### Go to connection Settings --> In listen addressess = 'localhost' change to
 ```
@@ -96,8 +96,8 @@ listen addressess = '*'
 ```
 ### Restart database
 ```
-systemctl restart postgresql-16
-systemctl status postgresql-16
+sudo systemctl restart postgresql
+sudo systemctl status postgresql
 ```
 
 ### To access the above database we need to install "sql-workbench". Download this "sql-workbench" the document URL is
