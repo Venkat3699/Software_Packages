@@ -8,7 +8,7 @@ sudo su -
 ### Update the server
 ```
 sudo apt-get update
-sudo apt install gnupg2 wget nano
+sudo apt install gnupg2 wget nano -y
 ```
 ### Add the PostgreSQL 16 repository
 ```
