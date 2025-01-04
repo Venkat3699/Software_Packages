@@ -57,7 +57,7 @@ create database employees;
 ```
 ### Grant all the privilleges to the user rishikumar to employees database
 ```
-grant all the privilleges on database employees to rishikumar;
+GRANT ALL PRIVILEGES ON DATABASE employees TO rishikumar;
 ```
 ### To quit the postgreSQL client
 ```
