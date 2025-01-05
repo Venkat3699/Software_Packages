@@ -45,9 +45,9 @@ sudo echo "postgres:admin123" | chpasswd
 
 # Create PostgreSQL user and database for SonarQube
 runuser -l postgres -c "createuser sonar"
-sudo -i -u postgres psql -c "ALTER USER sonar WITH ENCRYPTED PASSWORD 'admin123';"
-sudo -i -u postgres psql -c "CREATE DATABASE sonarqube OWNER sonar;"
-sudo -i -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE sonarqube to sonar;"
+sudo -i -u postgres psql -c "ALTER USER rishikumar WITH ENCRYPTED PASSWORD 'admin123';"
+sudo -i -u postgres psql -c "CREATE DATABASE sonarqube OWNER rishikumar;"
+sudo -i -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE sonarqube to rishikumar;"
 
 # Restart PostgreSQL service
 systemctl restart  postgresql
@@ -76,7 +76,7 @@ cp /opt/sonarqube/conf/sonar.properties /root/sonar.properties_backup
 
 # Configure SonarQube properties
 cat <<EOT> /opt/sonarqube/conf/sonar.properties
-sonar.jdbc.username=sonar
+sonar.jdbc.username=rishikumar
 sonar.jdbc.password=admin123
 sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
 sonar.web.host=0.0.0.0
