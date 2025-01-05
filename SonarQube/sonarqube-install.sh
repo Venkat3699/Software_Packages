@@ -44,7 +44,7 @@ sudo systemctl start  postgresql.service
 sudo echo "postgres:admin123" | chpasswd
 
 # Create PostgreSQL user and database for SonarQube
-runuser -l postgres -c "createuser sonar"
+runuser -l postgres -c "createuser rishikumar"
 sudo -i -u postgres psql -c "ALTER USER rishikumar WITH ENCRYPTED PASSWORD 'admin123';"
 sudo -i -u postgres psql -c "CREATE DATABASE sonarqube OWNER rishikumar;"
 sudo -i -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE sonarqube to rishikumar;"
