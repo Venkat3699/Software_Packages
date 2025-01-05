@@ -1,13 +1,13 @@
-## Install Nexus Repository Manager on Ubuntu 22.04
+# Install Nexus Repository Manager on Ubuntu 22.04
 ---------------------------------------------------
 
-### Installing Java OpenJDK 8
+## Installing Java OpenJDK 8
 ```
 sudo apt update
 sudo apt install openjdk-8-jdk
 java -version
 ```
-### Setting up System
+## Setting up System
 - To install Nexus, you will need to create a new dedicated Linux user with a valid shell and also need to set up the max open files for both hard and soft limits to '65536'.
 - Run the following command to create a new dedicated user for the Nexus with the name 'nexus'
 ```
@@ -26,7 +26,7 @@ sudo vim /etc/security/limits.d/nexus.conf
 ```
 nexus - nofile 65536
 ```
-### Installing Nexus Repository Manager
+## Installing Nexus Repository Manager
 - Download the Nexus Repository Manager package via the wget command as below. If the download process is finished, you will see the file 'nexus-3.41.1-01-unix.tar.gz' on your current working directory.
 ```
 wget https://download.sonatype.com/nexus/3/nexus-3.41.1-01-unix.tar.gz
@@ -102,7 +102,7 @@ sudo systemctl enable nexus.service
 sudo systemctl status nexus.service
 ```
 
-## Running Nexus with Reverse Proxy
+# Running Nexus with Reverse Proxy
 ```
 sudo apt install nginx
 sudo systemctl is-enabled nginx
