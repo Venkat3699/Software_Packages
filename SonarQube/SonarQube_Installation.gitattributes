@@ -6,13 +6,9 @@ Create AWS Ec2 instance(Instance type must be >= t2.small) and login using ec2-u
 Enable port 9000 in the respective security group/instance
 
 Install Java 17 as the root user
-    - Step_1: Changing as root user
-    ``` 
-    sudo -i 
-    ``` 
+    - Step_1: sudo -i  #Changing as root user
     - Step_2: Download the Java 17 rpm using the below command
-              wget https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-x64_bin.rpm
-              
+              wget https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-x64_bin.rpm     
     - Step_3: rpm -i jdk-17_linux-x64_bin.rpm
 
 Download Sonarqube from the below URL into /opt folder.
