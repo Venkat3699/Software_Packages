@@ -4,7 +4,7 @@
 ## Installing Java OpenJDK 8
 ```
 sudo apt update
-sudo apt install openjdk-8-jdk
+sudo apt install openjdk-8-jdk -y
 java -version
 ```
 ## Setting up System
