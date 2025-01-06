@@ -37,12 +37,12 @@ tar xzf nexus-3.41.1-01-unix.tar.gz
 ```
 - Next, move those extracted directories to '/opt' using the following command. The Nexus package directory will be '/opt/nexus' and the Nexus working directory will be '/opt/sonatype-work'.
 ```
-mv nexus-3.41.1-01 /opt/nexus
-mv sonatype-work /opt/
+sudo mv nexus-3.41.1-01 /opt/nexus
+sudo mv sonatype-work /opt/
 ```
 - change the ownership of both directories to the user and group 'nexus' via the chown command below.
 ```
-chown -R nexus:nexus /opt/nexus /opt/sonatype-work
+sudo chown -R nexus:nexus /opt/nexus /opt/sonatype-work
 ```
 - Open the file '/opt/nexus/bin/nexus.rc' using vim editor.
 ```
