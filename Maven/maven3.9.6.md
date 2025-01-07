@@ -7,11 +7,18 @@ sudo apt-get install wget -y
 sudo wget https://download.oracle.com/otn/java/jdk/11.0.25%2B9/60e5d03cc24a4e1c8ab5d29303dbe066/jdk-11.0.25_linux-aarch64_bin.tar.gz
 sudo mv jdk-11.0.25_linux-aarch64_bin.tar.gz /usr/local/
 sudo tar -xvzf /usr/local/jdk-11.0.25_linux-aarch64_bin.tar.gz
-
-sudo vim ~/.bashrc
+```
+- Open your /etc/profile.d/maven.sh:
+```
+sudo vim /etc/profile.d/maven.sh
+```
+- Add the following lines at the end
+```
 export JAVA_HOME=/usr/local/jdk-11.0.25
 export PATH=$JAVA_HOME/bin:$PATH
-source ~/.bashrc
+```
+- check java version
+```
 java -version
 ```
 ##### Step 2: Install Git
@@ -37,6 +44,8 @@ sudo vim /etc/profile.d/maven.sh
 ```
 - Add the following lines at the end
 ```
+export JAVA_HOME=/usr/local/jdk-11.0.25
+export PATH=$JAVA_HOME/bin:$PATH
 export M2_HOME=/opt/apache-maven-3.9.6
 export PATH=$M2_HOME/bin:$PATH
 ```
@@ -50,5 +59,6 @@ source /etc/profile.d/maven.sh
 ```
 - Verify the Installation
 ```
+java -version
 mvn -version
 ```
