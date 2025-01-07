@@ -56,10 +56,10 @@
 /// --> description: settings.xml file
 
 /// In the pom.xml file we need to add distribution Management
-/* Add these lines in the POM.xml file below </dependencies>
+/// Add these lines in the POM.xml file below </dependencies>
 
-<distributionManagement>
-    <repository>
+///<distributionManagement>
+///    <repository>
       <id>nexus</id>
       <name>Maven Web Application Nexus Repository</name>
       <url>http://10.0.2.15:8081/repository/myorg-maven-hosted-repo/</url>
@@ -70,9 +70,7 @@
       <name>Maven Web Application Nexus Repository</name>
       <url>http://10.0.2.15:8081/repository/myorg-maven-hosted-repo/</url>
     </snapshotRepository>
-</distributionManagement>
-
-*/
+</distributionManagement> ///
 
 /// In pipeline we need to call this settings.xml file
 
