@@ -2,23 +2,8 @@
 ##### Step 1: Install Prerequisites
 - Apache Maven requires Java. Ensure that Java is installed on your system:
 ```
-sudo apt-get update
-sudo apt-get install wget -y
-sudo wget https://download.oracle.com/otn/java/jdk/11.0.25%2B9/60e5d03cc24a4e1c8ab5d29303dbe066/jdk-11.0.25_linux-aarch64_bin.tar.gz
-sudo mv jdk-11.0.25_linux-aarch64_bin.tar.gz /usr/local/
-sudo tar -xvzf /usr/local/jdk-11.0.25_linux-aarch64_bin.tar.gz
-```
-- Open your /etc/profile.d/maven.sh:
-```
-sudo vim /etc/profile.d/maven.sh
-```
-- Add the following lines at the end
-```
-export JAVA_HOME=/usr/local/jdk-11.0.25
-export PATH=$JAVA_HOME/bin:$PATH
-```
-- check java version
-```
+sudo apt update
+sudo apt install default-jdk -y
 java -version
 ```
 ##### Step 2: Install Git
@@ -44,8 +29,8 @@ sudo vim /etc/profile.d/maven.sh
 ```
 - Add the following lines at the end
 ```
-export JAVA_HOME=/usr/local/jdk-11.0.25
-export PATH=$JAVA_HOME/bin:$PATH
+export JAVA_HOME=/usr/lib/jvm/default-java
+export M2_HOME=/opt/maven
 export M2_HOME=/opt/apache-maven-3.9.6
 export PATH=$M2_HOME/bin:$PATH
 ```
