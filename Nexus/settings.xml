@@ -1,0 +1,102 @@
+1. Create 3 Repositories in Nexus 
+    - Maven Proxy Repository
+        1. click on create repository
+        2. select maven2 (proxy) repository
+        3. enter the name and description (myorg-maven-proxy-repo)
+        4. type as: Release
+        5. Select the remote repository: https://repo1.maven.org/maven2/
+        6. click on create repository
+    - Maven Hosted Repository
+        1. click on create repository
+        2. select maven2 (hosted) repository
+        3. enter the name and description (myorg-maven-hosted-repo)
+        4. type as: snapshots
+        5. click on create repository
+    - Maven Group Repository
+        1. click on create repository
+        2. select maven2 (group) repository
+        3. enter the name and description (myorg-maven-group-repo)
+        4. type as: mixed
+        5. Select 2 repositories: myorg-maven-proxy-repo and myorg-maven-hosted-repo 
+        6. add to Right side in members
+        7. click on create repository
+
+2. Create an Role
+    - click on roles
+    - click on create role
+    - type as: Nexus role
+    - enter the name and description (myorg-maven-role)
+    - add Privilages as:
+        1. nx-repository-view-maven2-myorg-maven-group-repo-browse
+        2. nx-repository-view-maven2-myorg-maven-group-repo-read
+        3. nx-repository-view-maven2-myorg-maven-hosted-repo-edit
+        4. nx-repository-view-maven2-myorg-maven-hosted-repo-read
+    - click on create role
+3. create an User
+    - click on users
+    - click on create user
+    - Provide all necessary details like ID, firstname, lastname, email, password, status: active, Add role (above created)
+    - click on create user
+4. Add these Role to the User
+
+5. add this below content in the server.xml file under profile tag
+
+<profile>
+    <id>nexus</id>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Nexus Group Repository</name>
+            <url>http://10.0.2.15:8081/repository/myorg-maven-group/</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+  </repositories>
+
+  <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <name>Nexus Group Repository</name>
+            <url>http://10.0.2.15:8081/repository/myorg-maven-group/</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>true</enabled></snapshots>
+        </pluginRepository>
+  </pluginRepositories>
+</profile>
+
+/// below the profile tag we have active profile, replace testing keyword with nexus
+<activateProfiles>
+    <activeProfile>nexus</activeProfile>
+</activateProfiles>
+
+3. add this below content in the server.xml file under mirror tag. before this we need to comment the all mirrors.
+<mirrors>
+    <mirror>
+        <id>nexus</id>
+        <mirrorOf>*</mirrorOf>
+        <url>http://10.0.2.15:8081/repository/myorg-maven-group/</url>
+    </mirror>
+</mirrors>
+
+Add these lines in the POM.xml file below </dependencies>
+<distributionManagement>
+    <repository>
+      <id>nexus</id>
+      <name>Maven Web Application Nexus Repository</name>
+      <url>http://13.212.71.229:9980/srtechnologies/repository/canarabank-release/</url>
+    </repository>
+	    
+    <snapshotRepository>
+      <id>nexus</id>
+      <name>Maven Web Application Nexus Repository</name>
+      <url>http://13.212.71.229:9980/srtechnologies/repository/canarabank-snapshot/</url>
+    </snapshotRepository>
+</distributionManagement>
+
+## Go to Server.xml file in the Maven Home page conf folder
+    - Insert the below lines in the Server.xml file in <server> section
+        <server>
+            <id>nexus</id>
+            <username>admin</username>
+            <password>passw0rd</password>
+        </server>

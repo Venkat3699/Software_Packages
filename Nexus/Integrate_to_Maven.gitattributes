@@ -1,0 +1,89 @@
+## Add these lines below </dependencies>
+	<distributionManagement>
+	
+	    <repository>
+	      <id>nexus</id>
+	      <name>Maven Web Application Nexus Repository</name>
+	      <url>http://13.212.71.229:9980/srtechnologies/repository/canarabank-release/</url>
+	    </repository>
+	    
+	    <snapshotRepository>
+	      <id>nexus</id>
+	      <name>Maven Web Application Nexus Repository</name>
+	      <url>http://13.212.71.229:9980/srtechnologies/repository/canarabank-snapshot/</url>
+	    </snapshotRepository>
+	    
+	</distributionManagement>
+
+
+## Go to Server.xml file in the Maven Home page conf folder
+    - Insert the below lines in the Server.xml file in <server> section
+        <server>
+        <id>nexus</id>
+        <username>admin</username>
+        <password>passw0rd</password>
+        </server>
+
+### After this execute the command as "mvn clean deploy" in the terminal where your github code is available to deploy the project to the nexus repository.
+
+
+
+### We need to upload any jar file to the nexus repository from the local machine
+- create a repository in the nexus repository with mixed type
+- click on upload the artifact
+- Provide all the necessary details like groupid, jarfile name....
+- copy below lines and paste it in pom.xml after </properties>
+	<repository>
+		<id>nexus</id>
+		<name>mss remote repo>
+		<url>http://13.212.71.229:9980/srtechnologies/repository/mss-remote-repo/</url>
+	</repository>
+- Save and exit from the pom.xml file
+## Go to Server.xml file in the Maven Home page conf folder
+- copy below lines and paste it in server.xml in the <mirror> section
+	<mirror>
+		<id>nexus</id>
+		<mirrorOf>external:http:*</mirrorOf>
+		<name>repository to mirror external repository using HTTP</name>
+		<url>http://13.212.71.229:9980/srtechnologies/repository/mss-remote-repo/</url>
+	</mirror>
+
+
+### We need to create any proxy repository
+- create a repository in the maven proxy repository with mixed type
+- provide maven central repository url while creating
+- copy below lines and paste it in pom.xml after </properties>
+	<repository>
+		<id>nexus</id>
+		<name>mss proxy repo>
+		<url>http://13.212.71.229:9980/srtechnologies/repository/mss-proxy-repo/</url>
+	</repository>
+- Save and exit from the pom.xml file
+## Go to Server.xml file in the Maven Home page conf folder
+- copy below lines and paste it in server.xml in the <mirror> section
+	<mirror>
+		<id>nexus</id>
+		<mirrorOf>external:http:*</mirrorOf>
+		<name>repository to mirror external repository using HTTP</name>
+		<url>http://13.212.71.229:9980/srtechnologies/repository/mss-proxy-repo/</url>
+	</mirror>
+
+
+### We need to create any group of repository
+- create a repository in the maven group repository with mixed type
+- provide what repositories we need to group
+- copy below lines and paste it in pom.xml after </properties>
+	<repository>
+		<id>nexus</id>
+		<name>mss group repo>
+		<url>http://13.212.71.229:9980/srtechnologies/repository/mss-group-repo/</url>
+	</repository>
+- Save and exit from the pom.xml file
+## Go to Server.xml file in the Maven Home page conf folder
+- copy below lines and paste it in server.xml in the <mirror> section
+	<mirror>
+		<id>nexus</id>
+		<mirrorOf>external:http:*</mirrorOf>
+		<name>repository to mirror external repository using HTTP</name>
+		<url>http://13.212.71.229:9980/srtechnologies/repository/mss-group-repo/</url>
+	</mirror>

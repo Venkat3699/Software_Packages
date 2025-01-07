@@ -1,0 +1,27 @@
+	<properties>
+		
+		<sonar.host.url>http://18.138.81.149:9000/</sonar.host.url>
+		<sonar.login>admin</sonar.login>
+		<sonar.password>passw0rd</sonar.password> 
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+	</properties>
+
+    ## To execute in the pipeline the command is
+    # mvn sonar:sonar or mvn clean sonar:sonar
+
+## Sonar Cloud Configuration
+- create an account in sonarcloud.io using github (your choice)
+- create an organization
+- create Token
+- Configure sonarcloud in your project pom.xml file as follows:
+	<properties>
+		
+		<sonar.host.url>http://sonarcloud.io/</sonar.host.url>
+		<sonar.login>Token Provide here</sonar.login>			# Provide sonarcloud token here you have created one
+		<sonar.organization>Mention your Organization name</sonar.organization> # Mention your Organization name you have created one
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+	</properties>
