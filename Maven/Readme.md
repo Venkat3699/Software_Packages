@@ -25,3 +25,34 @@
     7. **site**: This phase is used to generate the project's site documentation. It uses the Maven Site tools to generate the site documentation. 
 
     8. **clean**: This phase is used to clean the project's build directory. It removes the compiled code, test results, and other build artifacts from the build directory. 
+
+
+### Maven Project Structure 
+A Maven project typically has the following structure:
+1. **pom.xml**: This is the project's POM file that defines the project's structure and dependencies . It is located in the project's root directory. 
+2. **src/main/java**: This directory contains the project's source code. It is located in the project's root directory. 
+3. **src/main/resources**: This directory contains the project's resources such as configuration files, images, and other files. It is located in the project's root directory. 
+4. **src/test/java**: This directory contains the project's unit tests. It is located in the project's root directory.
+5. **target**: This directory contains the project's build artifacts such as compiled code, test results , and other build artifacts. It is located in the project's root directory.
+6. **src/main/webapp**: This directory contains the project's web application resources such as HTML files, CSS files, and JavaScript files. It is located in the project's root directory.
+7. **src/main/webapp/WEB-INF**: This directory contains the project's web application configuration files such as web.xml. It is located in the project's root directory.
+8. **src/main/webapp/WEB-INF/classes**: This directory contains the project's compiled web application code. It is located in the project's root directory.
+9. **src/main/webapp/WEB-INF/lib**: This directory contains the project's web application dependencies such as JAR files. It is located in the project's root directory.
+10. **src/main/webapp/WEB-INF/classes/META-INF**: This directory contains the project 's web application metadata such as MANIFEST.MF. It is located in the project's root directory.
+11. **src/main/webapp/WEB-INF/classes/META-INF/MANIFEST.MF**: This file contains the project's web application metadata such as the project's name, version, and dependencies . It is located in the project's root directory.
+
+### Maven Commands 
+Here are some common Maven commands:
+1. **mvn clean**: This command is used to clean the project's build directory. It removes the compiled code, test results, and other build artifacts from the build directory.
+2. **mvn compile**: This command is used to compile the project's source code. It uses the Java compiler to compile the source code into class files.
+3. **mvn test**: This command is used to run the project's unit tests. It uses the JUnit framework to run the unit tests and reports the results.
+4. **mvn package**: This command is used to package the project's compiled code into a JAR or WAR file. It uses the Maven Archiver to package the code into a JAR or WAR file.
+5. **mvn install**: This command is used to install the project's JAR or WAR file into the local repository. It uses the Maven Deployer to install the JAR or WAR file into the local repository.
+6. **mvn deploy**: This command is used to deploy the project's JAR or WAR file into a remote repository. It uses the Maven Deployer to deploy the JAR or WAR file into a remote repository.
+7. **mvn site**: This command is used to generate the project's site documentation. It uses the Maven Site tools to generate the site documentation.
+8. **mvn clean package**: This command is used to clean the project's build directory and package the project's compiled code into a JAR or WAR file.
+9. **mvn clean install**: This command is used to clean the project's build directory and install the project's JAR or WAR file into the local repository.
+10. **mvn clean deploy**: This command is used to clean the project's build directory and deploy the project's JAR or WAR file into a remote repository.
+11. **mvn clean package -DskipTests**: This command is used to clean the project's build directory, package the project's compiled code into a JAR or WAR file, and skip the unit tests. 
+12. **mvn clean package -Dmaven.test.skip=true**: This command is used to clean the project's build directory, package the project's compiled code into a JAR or WAR file, and skip the unit tests. 
+
