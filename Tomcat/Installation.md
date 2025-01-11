@@ -18,6 +18,15 @@ sudo chown -R tomcat webapps/ work/ temp/ logs
 sudo update-java-alternatives -l
 /usr/lib/jvm/java-1.21.0-openjdk-amd64
 ```
+### Optional Steps
+```
+sudo vim /etc/sudoers
+```
+```
+root    ALL=(ALL:ALL) ALL
+tomcat  ALL=(ALL:ALL) NOPASSWD:ALL
+```
+
 ### Step 2: Configure the Tomcat Service
 ```
 sudo vim /etc/systemd/system/tomcat.service
@@ -61,12 +70,13 @@ sudo vim /opt/tomcat/conf/tomcat-users.xml
 ```
 <tomcat-users>
 
+    <role rolename="admin-gui"/>
     <role rolename="manager-gui"/>
-    <role rolename="manager-script"/>
-    <user username="admin" password="passw0rd" roles="manager-gui,manager-script"/>
+    <user username="admin" password="passw0rd" roles="manager-gui,admin-gui"/>
 
 </tomcat-users>
 ```
+- For Manager app:
 ```
 sudo vim /opt/tomcat/webapps/manager/META-INF/context.xml
 ```
@@ -76,3 +86,18 @@ sudo vim /opt/tomcat/webapps/manager/META-INF/context.xml
   allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
 ```
 
+- For Host Manager app:
+```
+sudo vim /opt/tomcat/webapps/host-manager/META-INF/context.xml
+```
+- Comment the below lines like this:
+```
+<!--  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+  allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+```
+
+
+### To access the Tomcat Server, use the following URL in your web browser: 
+- http://<your_domain_or_IP_address>:8080/
+- http://<your_domain_or_IP_address>:8080/manager/html
+- http://<your_domain_or_IP_address>:8080/host-manager/html
