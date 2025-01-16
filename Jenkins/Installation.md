@@ -36,7 +36,9 @@ sudo ufw status
 ```
 
 6. Finish Jenkins Initial Setup
-    - http://<Public-IP>:8080
+```
+http://<Public-IP>:8080
+```
 
 - You will get the page similar to what we have below prompting you to provide the Administrator’s password. As per the instructions, the password is located in the file:
 
