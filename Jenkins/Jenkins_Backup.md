@@ -120,6 +120,7 @@ Storage Class: STANDARD
 region: ap-south-1 
 ```
 -> Click on Generate Script
+
 6. Copy the script and paste it in the Jenkinsfile, and build the pipeline.
 7. Check the S3 Bucket for the backup files.
 8. To restore the backup files, follow the steps mentioned above in the "Restore Jenkins Backup from S3 Bucket
