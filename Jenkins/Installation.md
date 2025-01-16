@@ -34,7 +34,6 @@ sudo ufw allow 8080/tcp
 sudo ufw reload
 sudo ufw status
 ```
-![alt text](image.png)
 
 6. Finish Jenkins Initial Setup
     - http://<Public-IP>:8080
