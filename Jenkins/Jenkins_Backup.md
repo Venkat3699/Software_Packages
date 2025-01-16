@@ -15,6 +15,7 @@ Jenkins backup is a critical task to ensure that your Jenkins configuration and 
 ```
 cd /var/lib/jenkins
 mkdir jenkins_backup
+chown -R jenkins:jenkins jenkins_backup
 cd jenkins_backup
 pwd
 ```
@@ -22,11 +23,13 @@ pwd
 2. **Backup frequency**: Choose how often you want to create a backup. You can select from the following options: Daily, Weekly, Monthly, or Custom.
 - Backup schedule for full backup: Choose the time and frequency for the full backup. it take full backup of all data.
 - Backup schedule for diffrential backup: Choose the time and frequency for the differential backup. it take only any updated files are there in the jenkins home directory.
+```
 Ex: * * * * *   (or) Specific time period as per your requirement
-
+```
 3. **Max number of backup sets**: Specify the maximum number of backup sets you want to keep. This will help you manage the disk space used by the backups.
+```
 Ex: 5 (or) any number as per your requirement
-
+```
 - Click on the check boxes for the required backup settings and click on the "Save" button.
 #### Step-4
 - After configuring the backup settings, click on the "Backup" button to create the initial backup.
@@ -76,3 +79,43 @@ aws s3 cp jenkins-backup.tar.gz s3://<s3-bucket-name>/jenkins-backup.tar.gz
         tar -zxvf jenkins-backup.tar.gz -C /
         ```
     - Login to Jenkins Server and see the all backup jobs
+
+
+## Jenkins Backup into S3 Bucket using Pipeline
+1. Go to Manage Jenkins -> Click on Manage Plugins -> Available -> Search for "S3 Plugin Schedule" -> Install without restart
+2. Go to Manage Jenkins -> Configure System -> S3 Plugin Schedule -> Provide name, Access key and Secret Key -> Apply and Save
+3. Create a New job -> name: Jenkins_backup -> Pipeline -> ok
+4. In the Jenkinsfile, add the following code in the build-in node:
+```
+pipeline {
+    agent {
+        label 'Built-In'
+    }
+    stages {
+        stage('Jenkins Backup') {
+            steps {
+                sh '''
+                cd /var/lib/
+                tar -zcvf jenkins-backup.tar.gz jenkins   // zip ${WORKSPACE}/jenkinsBackup.zip jenkins
+                '''
+            }
+        }
+        stage('Upload to S3') {
+            steps {
+                script {
+                    // Generate the code from the pipeline Syntax and Paste it here, for this steps are mentioned below
+                }
+            }
+        }
+    }
+}
+```
+5. Go to Pipeline Syntax -> Search for s3 upload -> Provide the details as: s3profile: jenkinsbackup -> file to upload click on "Add" -> source: *.tar.gz (or)*.zip -> destination: <S3 bucket name> -> Storage Class: STANDARD -> region: ap-south-1 -> Click on Generate Script
+6. Copy the script and paste it in the Jenkinsfile, and build the pipeline.
+7. Check the S3 Bucket for the backup files.
+8. To restore the backup files, follow the steps mentioned above in the "Restore Jenkins Backup from S3 Bucket
+    - install Aws Cli
+    - Copy the backup file from S3 bucket to the instance
+    - Extract the tar file or zip file
+    - Check all the files are restored successfully
+    - copy the Specific job (deleted job) from the backup folder to the jenkins home directory.
