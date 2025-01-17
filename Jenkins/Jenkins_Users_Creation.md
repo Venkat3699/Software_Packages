@@ -43,21 +43,30 @@ Email Address: venkat@flash.com
 
 #### Configure Global Security
 - Install the Jenkins plugin "Role Based Authorization Strategy Plugin" from the Jenkins plugin manager.
-- Go to Manage Jenkins -> Configure Global Security -> Select "Role-Based Authorization Strategy" as the authorization strategy.
-- Create roles for the users. For example, we can create the following roles:
-1. Developer
-- Rishi
-- Kiran
-2. DevOps
-- Sekhar
-- Venkat
-- Assign the roles to the users. For example, we can assign the following roles to the users :
-- Rishi: Developer
-- Kiran: Developer
-- Sekhar: DevOps
-- Venkat: DevOps
-- Save the changes.
-- Go to Manage Jenkins -> Configure Global Security -> Select "Role-Based Authorization Strategy" as the authorization strategy.
+- Go to Manage Jenkins -> click on Security -> Select "Role-Based Authorization Strategy" in the authorization -> Apply and Save.
+- Logout and Login Once again 
+- Go to Manage Jenkins -> click on Security 
+##### Click on manage and Assign Roles 
+- In Global Roles ->
+```
+Role add: Developer -> click on Add
+Role add: DevOps -> click on Add
+```
+- Select the Permissions you need to provide for the roles
+- In Item roles ->
+```
+Role add: Developer -> pattern: Developer.* -> click on Add
+Role add: DevOps -> pattern: DevOps.* -> click on Add
+```
+#####  Click on Assign Roles on the Left side
+- In Global Roles -> Click on Add User -> Provide name as: Rishi -> click on Add -> Select the Role as: Developer
+- In Global Roles -> Click on Add User -> Provide name as: Kiran -> click on Add -> Select the Role as: Developer
+- In Global Roles -> Click on Add User -> Provide name as: Sekhar -> click on Add -> Select the Role as: DevOps
+- In Global Roles -> Click on Add User -> Provide name as: Venkat -> click on Add -> Select the Role as: DevOps.
+
+- Click on Apply and Save
+- Login as Users credentials and check if we are able to access the Jenkins dashboard or not. If we are able to access the dashboard, check your access with the given permissions or not.
+
 ### OR
 - Go to Manage Jenkins -> Configure Global Security -> Select "Project-Based Matrix Authorization Strategy" as the authorization strategy.
 - Click on Add users -> Enter the Usernames and assign the permissions to that users by clicking on the checkbox.
