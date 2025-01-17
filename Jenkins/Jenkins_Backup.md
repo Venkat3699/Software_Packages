@@ -5,12 +5,9 @@ Jenkins backup is a critical task to ensure that your Jenkins configuration and 
 - Go to the Jenkins dashboard and click on the "Manage Jenkins" link.
 - Click on the "Manage Plugins" link.
 - Install "Thin Backup" plugin.
-#### Step-2
-- Go to the Jenkins dashboard and click on the "Manage Jenkins" link.
-- Scroll down to the " Thin Backup" section.
-- Click on the "Thin Backup" button.
-#### Step-3 Configuring Backup Settings
-- In the "Thin Backup" configuration page, you can configure the backup settings as follows:
+
+#### Step-2 Configuring Backup Settings in system configuration
+- go to Manage Jenkins -> Click on System -> Scroll down to " ThinBackup Configuration" section -> Provide the details:
 1. **Backup directory**: Specify the directory where you want to store the backup files. This directory should be outside of the Jenkins home directory to avoid any potential data loss.
 ```
 cd /var/lib/jenkins
@@ -18,6 +15,7 @@ mkdir jenkins_backup
 chown -R jenkins:jenkins jenkins_backup
 cd jenkins_backup
 pwd
+/var/lib/jenkins/jenkins_backup
 ```
 - Copy the Path and paste it in the Backup directory field in the Thin Backup configuration page.
 2. **Backup frequency**: Choose how often you want to create a backup. You can select from the following options: Daily, Weekly, Monthly, or Custom.
@@ -31,6 +29,12 @@ Ex: * * * * *   (or) Specific time period as per your requirement
 Ex: 5 (or) any number as per your requirement
 ```
 - Click on the check boxes for the required backup settings and click on the "Save" button.
+
+#### Step-3
+- Go to the Jenkins dashboard and click on the "Manage Jenkins" link.
+- Scroll down to the " Thin Backup" section.
+- Click on the "Thin Backup" button.
+
 #### Step-4
 - After configuring the backup settings, click on the "Backup" button to create the initial backup.
 - The backup process may take some time depending on the size of your Jenkins data.
@@ -55,8 +59,11 @@ tar -zcvf jenkins-backup.tar.gz /var/lib/jenkins/
 ```
 - Install awscli in the jenkins server
 ```
-sudo apt install -y python3-pip
-sudo pip3 install awscli
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+sudo apt install unzip
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
 ```
 - Copy the Jenkins Backup tar file into s3 bucket
 ```
