@@ -3,7 +3,7 @@ Jenkins CLI is a command-line tool that allows you to interact with Jenkins from
 
 #### Download and Install Jenkins CLI
 To download and install Jenkins CLI, follow these steps:
-- http://<Jenkins Server PublicIP>:8080/cli/     # Execute this command
+- http://< Jenkins PublicIP >:8080/cli/     # Execute this in the browser
 - Click on jenkins-cli.jar and download it
 - Create a New Folder on your local Desktop as "Jenkins-CLI"
 - Copy the downloaded jenkins-cli.jar file into the newly created folder
