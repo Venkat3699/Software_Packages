@@ -1,0 +1,40 @@
+node 'master' {
+    buildName 'Dev - $(BUILD_NUMBER)'   // Build Name and Number
+    buildDescription 'ScriptedPipeline' // Build Description
+    def mavenHome = tool name: "maven3.8.5"     // mention in the Manage Jenkins, Global tool configuration
+    echo "The node name is: ${env.NODE_NAME}"   // Print the node name like 'master', 'slave1', etc.
+    echo "The Job name is: ${env.JOB_NAME}"     // Print the job name like 'Facebook', etc.
+    echo "The build name is: ${env.BUILD_NAME}" // Print the build name like 'Dev - 1', etc.
+    echo "The build number is: ${env.BUILD_NUMBER}" // Print the build number like '1', etc.
+
+    // Code Checkout
+    stage ('Clone Code form GitHub') {
+        git branch: 'main', credentialsId: 'be624cd2-9c43-4b67-a251-6272a5367973', url: 'https://github.com/Venkat3699/maven-web-application.git'
+    }
+
+    // Unit Testing
+    stage ('Unit Testing') {
+        sh "$mavenHome/bin/mvn clean test"
+    }
+
+    // SonarQube Analysis Report
+    stage ('SonarQube Analysis Report') {           // Make Sure Configure sonarQube Credentials in POM.XML file
+        sh "$mavenHome/bin/mvn sonar:sonar"
+    }
+
+    // Build the application
+    stage ('Build the application') {
+        sh "$mavenHome/bin/mvn clean package"
+    }
+
+    // Upload Artifact into Nexus 
+    stage ('Upload Artifact into Nexus') {          // Make sure Configure Nexus Credentials in Maven settings.xml and pom.xml files
+        sh "$mavenHome/bin/mvn deploy"
+    }
+
+    // Deploy to Tomcat using SSH agent
+    stage ('Deploy to Tomcat using SSH agent') {
+        sshagent(['37d38c8c-1fbf-48a6-ae04-ee8dc0fd9b87']) {    // Install SSH agent Plugin and then create syntax
+            sh "sudo scp -o StrictHostKeyChecking=no target/maven-web-application.war ubuntu@172.65.4.3:/opt/apache-tomcat-9.0.60/webapps"      // Make sure check your tomcat private IP and Tomcat webapps path
+        }
+}

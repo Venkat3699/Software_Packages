@@ -1,0 +1,65 @@
+pipeline {
+    agent {
+        label 'Built-In'
+    }
+    tools {
+        maven "maven3.8.5"
+    }
+
+    tiggers {       // Trigger the pipeline when a change is detected in the repository
+        pollSCM('* * * * *')
+        cron('* * * * *')
+    }
+
+    options {       // Maintain Time stamp in Console Output and maintain 5 builds 
+        timestamps()
+        buildDiscarder logRotator(daysToKeepStr: '', numToKeepStr: '5', artifactDaysToKeepStr: '', artifactNumToKeepStr: '5')
+    }
+
+    stages {
+        stage('clean Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', credentialsId: 'be624cd2-9c43-4b67-a251-6272a5367973', url: 'https://github.com/Venkat3699/maven-web-application.git'
+            }
+        }
+
+        stage('Unit Testing') {
+            steps {
+                sh 'mvn clean test'
+            }
+        }
+
+        stage('SonarQube Analysis') { 
+            steps {
+                sh 'mvn sonar:sonar'
+            }
+        }
+
+        stage('Build the package') { 
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Upload Artifact to Nexus') { 
+            steps {
+                sh 'mvn deploy'
+            }
+        }
+
+        stage('Deploy to Tomcat Server') { 
+            steps {
+                sshagent(['37d38c8c-1fbf-48a6-ae04-ee8dc0fd9b87']) {    // Install SSH agent Plugin and then create syntax
+                    sh "sudo scp -o StrictHostKeyChecking=no target/maven-web-application.war ubuntu@172.65.4.3:/opt/apache-tomcat-9.0.60/webapps"      // Make sure check your tomcat private IP and Tomcat webapps path
+                }
+            }
+        }
+
+    } // Stages Ends 
+}// pipeline Ends
