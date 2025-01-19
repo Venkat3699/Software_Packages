@@ -21,7 +21,7 @@ node {
     }
     stage ('Deploy to Tomcat using SSH agent') {
         sshagent(['37d38c8c-1fbf-48a6-ae04-ee8dc0fd9b87']) {    // Install SSH agent Plugin and then create syntax
-           cicd.DeployToTomcat("172.31.42.1")
+           cicd.deployToTomcat("172.31.42.1")
         }
     }
 }

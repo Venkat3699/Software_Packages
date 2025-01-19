@@ -24,14 +24,6 @@ def call(String mavenGoal) {
     }
 }
 
-def DeployToTomcat(ip) {
+def deployToTomcat(ip) {
     sh "sudo scp -o StrictHostKeyChecking=no target/maven-web-application.war ubuntu@${ip}:/opt/apache-tomcat-9.0.60/webapps"
 }
-
-
-
-
-stage ('Deploy to Tomcat using SSH agent') {
-        sshagent(['37d38c8c-1fbf-48a6-ae04-ee8dc0fd9b87']) {    // Install SSH agent Plugin and then create syntax
-            sh "sudo scp -o StrictHostKeyChecking=no target/maven-web-application.war ubuntu@172.65.4.3:/opt/apache-tomcat-9.0.60/webapps"      // Make sure check your tomcat private IP and Tomcat webapps path
-        }
