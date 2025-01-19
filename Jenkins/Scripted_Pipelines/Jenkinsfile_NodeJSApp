@@ -1,0 +1,49 @@
+// Scripted Pipeline for NodeJs Application
+
+// Go to Manage Jenkins -> Click on Plugins -> Click on Availables -> Search for "nodeJS" -> Click on Install without Restart
+// Go to Manage Jenkins -> Click on Global tool configuration -> Scroll Down to NodeJS Installations -> Click on Add NodeJS -> Name: node17.8.0 -> Select the Version -> Click on Save
+// Make Sure create a sonar-project.js file for SonarQube Scan
+// Make Sure Configure Sonar-project.js file in package.json file under scripts section
+// Create the Repository in the Nexus Repository Manager. Steps are
+// Go to Nexus Repository Manager -> Click on Repositories -> Click on Create Repository -> Select npm (hosted) -> Name: nodejs-repo -> In Hosted: Deployment Policy: Allow Redeploy -> Click on Create Repository
+// Copy the Repository URL of "nodejs-repo" and paste it in the package.json file under the "publishConfig" section
+// Create a .npmrc file in the nodeJs project github Repository, The file content is:
+/* email: admin@gmail.com
+   # always-auth: true
+   _auth: Paste base64 encoded credentials        // Execute this Command in any terminal: echo -n "admin:password" | openssl base64 
+   allowRepublish=true
+*/ 
+node {
+    // Checkout the code from the repository
+    stage ('Checkout') {
+        git 'https://github.com/your-username/your-repo-name.git'
+    }
+    // Build the application using npm
+    stage('Build') {
+        nodejs(nodeJsInstallationName: 'nodejs17.8.0') {
+            sh 'npm install'
+        }
+    }
+    // Run the tests
+    stage('Test') {
+        nodejs(nodeJsInstallationName: 'nodejs17.8.0') {
+            sh 'npm run test'
+        }
+    }
+    // SonarQube analysis 
+    stage('SonarQube') {
+        nodejs(nodeJsInstallationName: 'nodejs17.8.0') {
+            sh 'npm run sonar'          // OR node sonar-project.js
+        }
+    }
+
+    // Upload the build artifacts to the Nexus Artifactory 
+    stage('Upload to Nexus Artifactory') {      // Install nodeJs on Jenkins server, command is: apt-get install nodejs -y
+            sh 'npm publish'        // It will publish the package to the Nexus Artifactory
+        }
+    
+    // Run the NodeJS application 
+    stage('Run NodeJS Application') {
+            sh 'node app.js'        // OR npm run start
+        }
+}
